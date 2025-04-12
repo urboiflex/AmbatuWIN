@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Component</title>
+    <link rel="stylesheet" href="header/header.css">
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <!-- Additional CSS to override navigation colors -->
+    <style>
+        /* Override navigation colors */
+        .nav-item {
+            color: var(--white) !important;
+        }
+        
+        /* Change the underline color to match text color */
+        .nav-item::after {
+            background-color: var(--white) !important;
+        }
+        
+        /* Remove underline for active state */
+        .nav-item.active::after {
+            width: 0 !important;
+        }
+        
+        /* CRITICAL: Ensure hover effect works even on active items */
+        .nav-item.active:hover::after {
+            width: 100% !important;
+        }
+        
+        /* Ensure specificity by also targeting header container */
+        header .nav-item:hover::after {
+            width: 100% !important;
+        }
+        
+        /* Also update the header background for better contrast */
+        header.scrolled {
+            background-color: rgba(24, 24, 27, 0.9); /* Using zinc-900 with opacity */
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="logo">
+            <div class="logo-icon">▲</div>
+            <div class="logo-text">VOUCH</div>
+        </div>
+        
+        <div class="nav-container">
+            <nav class="main-nav">
+                <a href="#home" class="nav-item active">Home</a>
+                <a href="#about" class="nav-item">About</a>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="btn">Sign Up</button>
+                <button class="btn filled">Login</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Initialization Script -->
+    <script>
+        // Header functionality
+        function initHeader() {
+            // Add scroll event listener to change header style on scroll
+            $(window).scroll(function() {
+                if ($(window).scrollTop() > 50) {
+                    $('#header').addClass('scrolled');
+                } else {
+                    $('#header').removeClass('scrolled');
+                }
+            });
+            
+            // Add click event for navigation items
+            $('.nav-item').on('click', function(e) {
+                // Skip processing for links that open in new tabs
+                if ($(this).attr('target') === '_blank') {
+                    return;
+                }
+                
+                // Remove active class from all navigation items
+                $('.nav-item').removeClass('active');
+                
+                // Add active class to clicked item
+                $(this).addClass('active');
+                
+                // Get the target section id from the href attribute
+                const targetId = $(this).attr('href');
+                
+                // Scroll to the target section with an offset for the fixed header
+                const targetSection = $(targetId);
+                if (targetSection.length) {
+                    const headerHeight = $('#header').outerHeight();
+                    
+                    // More precise scrolling control
+                    e.preventDefault();
+                    $('html, body').animate({
+                        scrollTop: targetSection.offset().top - headerHeight
+                    }, 800);
+                }
+            });
+            
+            // Add manual hover detection to ensure underline works
+            $('.nav-item').hover(
+                function() {
+                    // On mouseenter
+                    $(this).find('::after').css('width', '100%');
+                },
+                function() {
+                    // On mouseleave
+                    if (!$(this).hasClass('active')) {
+                        $(this).find('::after').css('width', '0');
+                    }
+                }
+            );
+        }
+
+        // Initialize the header when the document is loaded
+        $(document).ready(function() {
+            initHeader();
+        });
+    </script>
+</body>
+</html>
