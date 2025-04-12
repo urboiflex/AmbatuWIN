@@ -1,0 +1,246 @@
+/* Vouch Registration Styles - Namespaced to avoid conflicts */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(circle at 50% 30%, rgba(40, 40, 40, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+    position: relative;
+    overflow: hidden;
+}
+
+.vouch-reg-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.vouch-reg-header {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.vouch-reg-logo {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 10px;
+}
+
+.vouch-reg-logo-icon {
+    font-size: 20px;
+    color: #fff;
+}
+
+.vouch-reg-logo-text {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+/* Content Styles */
+.vouch-reg-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.vouch-reg-form {
+    background-color: rgba(20, 20, 20, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+/* Background effect */
+.vouch-reg-content::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(40, 40, 40, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    filter: blur(30px);
+}
+
+/* Form Styles */
+.vouch-reg-form h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.vouch-reg-subtitle {
+    color: #aaa;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.vouch-reg-form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.vouch-reg-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.vouch-reg-form-group input {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(30, 30, 30, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.vouch-reg-form-group input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.vouch-reg-password-container {
+    position: relative;
+}
+
+.vouch-reg-toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.vouch-reg-toggle-password:hover {
+    color: #fff;
+}
+
+.vouch-reg-eye-icon {
+    display: inline-block;
+}
+
+.vouch-reg-eye-icon.visible {
+    color: #fff;
+}
+
+.vouch-reg-terms {
+    margin: 25px 0;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.vouch-reg-terms a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.vouch-reg-terms a:hover {
+    text-decoration: underline;
+}
+
+.vouch-reg-submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.vouch-reg-submit-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Login Option Styles */
+.vouch-reg-login-option {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.vouch-reg-login-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.vouch-reg-login-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+/* Loader Styles */
+.vouch-reg-loader {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.vouch-reg-spinner {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 26px solid #fff;
+    animation: vouch-reg-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes vouch-reg-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .vouch-reg-form {
+        max-width: 90%;
+        padding: 30px 20px;
+    }
+}

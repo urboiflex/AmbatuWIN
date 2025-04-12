@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vouch</title>
+    <!-- jQuery needs to be loaded BEFORE any scripts that use it -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <!-- Spline 3D Viewer Script -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
+    
+    <!-- CSS files -->
+    <link rel="stylesheet" href="header/header.css">
+    <link rel="stylesheet" href="about/about.css">
+    <link rel="stylesheet" href="sponsorship/sponsorship.css">
+    <link rel="stylesheet" href="footer/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Fix scrolling issues */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: auto !important; /* Override the overflow: hidden property */
+            height: 100%;
+            width: 100%;
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+        }
+        
+        /* Make sure only the home container has overflow hidden */
+        .home-container {
+            overflow: auto;      /* was: hidden */
+            height: auto;         /* allow content-based height */
+        }
+        
+        /* Ensure other sections are visible and scrollable */
+        section {
+            min-height: 100vh;
+            padding-top: 80px;
+            box-sizing: border-box;
+            overflow: visible;
+        }
+        
+        /* Debug style to ensure content is visible */
+        #about {
+            background-color: var(--dark-bg, #000000); /* Use CSS variable if defined, fallback to black */
+            color: var(--text-primary, #ffffff); /* Use CSS variable if defined, fallback to white */
+        }
+        
+        /* Sponsorship section doesn't need to be full viewport height */
+        #sponsorship {
+            min-height: auto;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <header id="header">
+        <div class="logo">
+            <div class="logo-icon">▲</div>
+            <div class="logo-text">VOUCH</div>
+        </div>
+        
+        <div class="nav-container">
+            <nav class="main-nav">
+                <a href="#home" class="nav-item active">Home</a>
+                <a href="#about" class="nav-item">About</a>
+                <a href="#sponsorship" class="nav-item">Partners</a>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="btn" id="signupBtn">Sign Up</button>
+                <button class="btn filled" id="loginBtn">Login</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Component -->
+    <main id="home" class="home-container">
+    <spline-viewer url="https://prod.spline.design/YW1DciXqkSL1sKbm/scene.splinecode"></spline-viewer>
+    </main>
+
+    <!-- About Section - Will be loaded via jQuery -->
+    <section id="about">
+        <!-- Content from about.html will be loaded here -->
+    </section>
+    
+    <!-- Sponsorship Section - Will be loaded via jQuery -->
+    <section id="sponsorship">
+        <!-- Content from sponsorship.html will be loaded here -->
+    </section>
+
+    <!-- Footer Component - Container that will be populated via jQuery -->
+    <footer class="vouch-footer" id="footer-container">
+        <!-- Footer content will be loaded here via jQuery -->
+    </footer>
+
+    <!-- Scripts -->
+    <script src="header/header.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Debug - check if jQuery is working
+            console.log("jQuery version:", $.fn.jquery);
+            
+            // Login button redirect
+            $('#loginBtn').on('click', function() {
+                window.location.href = 'login/login.html';
+            });
+            
+            // Sign Up button redirect
+            $('#signupBtn').on('click', function() {
+                window.location.href = 'register/register.html';
+            });
+            
+            // Load the about section from about.html
+            $("#about").load("about/about.html .about-section", function(response, status, xhr) {
+                console.log("About section load status:", status);
+                
+                if (status == "error") {
+                    console.error("Error loading about section:", xhr.statusText);
+                    // If there's an error, show a message in the about section
+                    $("#about").html("<div class='container'><h2>Error loading about section</h2><p>Please check the console for details.</p></div>");
+                } else {
+                    console.log("About section loaded successfully");
+                    
+                    // Make sure about.js is loaded
+                    if ($('script[src="about/about.js"]').length === 0) {
+                        const aboutScript = document.createElement('script');
+                        aboutScript.src = "about/about.js";
+                        document.body.appendChild(aboutScript);
+                        console.log("Added about.js script");
+                    }
+                }
+                
+                // Make sure the section maintains the proper padding for header
+                $("#about").css("padding-top", "80px");
+            });
+            
+            // Load the sponsorship section from sponsorship.html
+            $("#sponsorship").load("sponsorship/sponsorship.html .sponsors-section", function(response, status, xhr) {
+                console.log("Sponsorship section load status:", status);
+                
+                if (status == "error") {
+                    console.error("Error loading sponsorship section:", xhr.statusText);
+                    // If there's an error, show a message in the sponsorship section
+                    $("#sponsorship").html("<div class='container'><h2>Error loading sponsorship section</h2><p>Please check the console for details.</p></div>");
+                } else {
+                    console.log("Sponsorship section loaded successfully");
+                    
+                    // Make sure sponsorship.js is loaded
+                    if ($('script[src="sponsorship/sponsorship.js"]').length === 0) {
+                        const sponsorshipScript = document.createElement('script');
+                        sponsorshipScript.src = "sponsorship/sponsorship.js";
+                        document.body.appendChild(sponsorshipScript);
+                        console.log("Added sponsorship.js script");
+                    }
+                }
+            });
+            
+            // Load the footer component from footer.html
+            $("#footer-container").load("footer/footer.html #vouch-footer-component > *", function(response, status, xhr) {
+                console.log("Footer load status:", status);
+                
+                if (status == "error") {
+                    console.error("Error loading footer:", xhr.statusText);
+                    // If there's an error, show a minimal footer
+                    $("#footer-container").html("<div class='vouch-footer-bottom'><p class='vouch-copyright'>Copyright © 2025 Vouch Inc. All rights reserved.</p></div>");
+                } else {
+                    console.log("Footer loaded successfully");
+                    
+                    // Setup theme switch functionality after footer is loaded
+                    $(".vouch-theme-switch").on("click", function() {
+                        const currentMode = $(this).find('span').text();
+                        if (currentMode === 'Dark') {
+                            $(this).find('i').removeClass('fa-moon').addClass('fa-sun');
+                            $(this).find('span').text('Light');
+                            // Add dark mode logic here if needed
+                        } else {
+                            $(this).find('i').removeClass('fa-sun').addClass('fa-moon');
+                            $(this).find('span').text('Dark');
+                            // Add light mode logic here if needed
+                        }
+                    });
+                }
+            });
+            
+            // Navigation active state
+            $('.nav-item').on('click', function() {
+                $('.nav-item').removeClass('active');
+                $(this).addClass('active');
+            });
+            
+            // Get Started button (if it exists)
+            $(document).on('click', '#getStartedBtn', function(e) {
+                e.preventDefault();
+                
+                // Scroll to the About section
+                const targetSection = $('#about');
+                if (targetSection.length) {
+                    const headerHeight = $('#header').outerHeight();
+                    $('html, body').animate({
+                        scrollTop: targetSection.offset().top - headerHeight
+                    }, 800);
+                    
+                    // Update active nav item
+                    $('.nav-item').removeClass('active');
+                    $('.nav-item[href="#about"]').addClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
