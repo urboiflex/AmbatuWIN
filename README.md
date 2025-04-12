@@ -112,7 +112,7 @@ Vouch employs several strategies to ensure each merchant receives relevant insig
 ## Demo Video Link
 
 Below is the link for the demo video that is made by our team to understand the system better:
-[TECH DEMO VIDEO] (https://drive.google.com/file/d/1LvD2IOheWWPrjr7NdMnBpxxA7ahJaSWJ/view)
+https://drive.google.com/file/d/1LvD2IOheWWPrjr7NdMnBpxxA7ahJaSWJ/view
 
 ## Credits
 
