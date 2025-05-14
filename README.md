@@ -4,7 +4,7 @@ Vouch is an innovative AI-powered chat assistant designed specifically for South
 
 ## Project Description
 
-Vouch bridges the gap between data complexity and business action by offering an intuitive, conversational interface that actively delivers real-time insights, personalized recommendations, and inventory alerts, all tailored to the merchant's unique profile. Whether a merchant is a small local vendor or a mid-sized cloud kitchen, Vouch helps ensure smarter business planning and better day-to-day decisions.
+Vouch bridges the gap between data complexity and business action by offering an intuitive, conversational interface that actively delivers real-time insights, personalized recommendations, and inventory alerts, all tailored to the merchant's unique profile. Whether a merchant is a small local vendor or a mid-sized cloud kitchen, Vouch helps to make sure smarter business planning and better day-to-day decisions.
 
 The assistant leverages the power of natural language processing (NLP), real-time data analytics, and personalization algorithms to provide clear, actionable information in simple language. By eliminating technical barriers, Vouch empowers merchants of all digital literacy levels to benefit from advanced analytics, helping them scale operations, reduce inefficiencies, and better serve customers.
 
